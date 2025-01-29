@@ -41,6 +41,8 @@ jobs:
           git clone https://github.com/code2docs-ai/${{ env.docs_repo_name }}.git
           cd ${{ env.docs_repo_name }}
           echo "created by code2repo ai" > README.md
+          git config --global user.email "code2docs-ai@leansoftx.com"
+          git config --global user.name "code2docs-ai agent"
           git add README.md
           git commit -m "Add README.md"
           git push origin main
