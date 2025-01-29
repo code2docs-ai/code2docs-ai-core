@@ -1,0 +1,37 @@
+name: Create New Repo
+
+on:
+  workflow_dispatch:
+    inputs:
+      repoUrl:
+        description: 'The GitHub repository URL in HTTPS format'
+        required: true
+      branchName:
+        description: 'The branch name to use'
+        default: 'main'
+
+jobs:
+  create-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print input parameters
+        run: |
+          echo "repoUrl: ${{ github.event.inputs.repoUrl }}"
+          echo "branchName: ${{ github.event.inputs.branchName }}"
+
+      - name: Extract orgName and repoName
+        id: extract
+        run: |
+          orgName=$(echo "${{ github.event.inputs.repoUrl }}" | cut -d'/' -f4)
+          repoName=$(echo "${{ github.event.inputs.repoUrl }}" | cut -d'/' -f5 | cut -d'.' -f1)
+          echo "orgName=$orgName" >> $GITHUB_ENV
+          echo "repoName=$repoName" >> $GITHUB_ENV
+          docs_repo_name="${orgName}_${repoName}"
+          echo "docs_repo_name=$docs_repo_name" >> $GITHUB_ENV
+
+      - name: Create new repo
+        uses: peter-evans/create-or-update-repo@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: ${{ env.docs_repo_name }}
+          private: true
