@@ -1,4 +1,4 @@
-name: Create New Repo
+name: code2docs agent workflow
 
 on:
   workflow_dispatch:
