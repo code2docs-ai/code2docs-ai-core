@@ -45,4 +45,4 @@ jobs:
           git config --global user.name "code2docs-ai agent"
           git add README.md
           git commit -m "Add README.md"
-          git push origin main
+          git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/code2docs-ai/${{ env.docs_repo_name }}.git main
