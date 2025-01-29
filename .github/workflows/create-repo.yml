@@ -34,4 +34,4 @@ jobs:
           curl -X POST -H "Authorization: token ${{ secrets.MY_PAT }}" \
           -H "Accept: application/vnd.github.v3+json" \
           https://api.github.com/orgs/code2docs-ai/repos \
-          -d '{"name":"${{ env.docs_repo_name }}","private":true}'
+          -d '{"name":"${{ env.docs_repo_name }}","private":false}'
