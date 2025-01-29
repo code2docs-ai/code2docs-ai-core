@@ -15,7 +15,7 @@ To use this GitHub Action workflow, follow these steps:
 2. The workflow will perform the following steps:
    - Print out the input parameters values in the workflow log.
    - Extract the `orgName` and `repoName` from the `repoUrl`, and concatenate them to form another parameter `docs_repo_name` = `orgName_repoName`.
-   - Create a new repository in the current organization with the name `docs_repo_name`.
+   - Create a new repository in the current organization with the name `docs_repo_name` using the GitHub API.
 
 ### Example
 
