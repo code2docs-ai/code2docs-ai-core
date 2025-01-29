@@ -30,8 +30,10 @@ jobs:
           echo "docs_repo_name=$docs_repo_name" >> $GITHUB_ENV
 
       - name: Create new repo
-        uses: peter-evans/create-or-update-repo@v2
+        uses: peter-evans/create-or-update-repository@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           name: ${{ env.docs_repo_name }}
           private: true
+
+# Note: The workflow requires a `GITHUB_TOKEN` secret to authenticate and create the new repository.

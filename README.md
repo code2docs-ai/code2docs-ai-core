@@ -34,3 +34,7 @@ on:
 ```
 
 This will trigger the workflow and create a new repository in the current organization based on the input `repoUrl`.
+
+### Note
+
+The workflow requires a `GITHUB_TOKEN` secret to authenticate and create the new repository.
