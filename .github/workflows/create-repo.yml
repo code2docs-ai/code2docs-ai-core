@@ -60,7 +60,7 @@ jobs:
         run: |
           git clone https://github.com/code2docs-ai/${{ env.docs_repo_name }}.git
           cd ${{ env.docs_repo_name }}
-          echo "# Docs written by code2repo-ai agent" > README.md
+          echo "# Docs written by code2docs-ai agent" > README.md
           git config --global user.email "code2docs-ai@leansoftx.com"
           git config --global user.name "code2docs-ai agent"
           git add README.md
