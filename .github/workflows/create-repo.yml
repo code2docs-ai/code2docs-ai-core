@@ -1,4 +1,4 @@
-name: code2docs agent workflow
+name: code2docs-ai agent workflow
 
 on:
   workflow_dispatch:
