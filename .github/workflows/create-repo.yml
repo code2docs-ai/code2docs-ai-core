@@ -29,6 +29,19 @@ jobs:
           docs_repo_name="${orgName}_${repoName}"
           echo "docs_repo_name=$docs_repo_name" >> $GITHUB_ENV
 
+      - name: Check if repo exists
+        id: check-repo
+        run: |
+          repo_exists=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: token ${{ secrets.MY_PAT }}" \
+          https://api.github.com/repos/code2docs-ai/${{ env.docs_repo_name }})
+          echo "repo_exists=$repo_exists" >> $GITHUB_ENV
+
+      - name: Delete existing repo
+        if: env.repo_exists == '200'
+        run: |
+          curl -X DELETE -H "Authorization: token ${{ secrets.MY_PAT }}" \
+          https://api.github.com/repos/code2docs-ai/${{ env.docs_repo_name }}
+
       - name: Create new repo
         run: |
           curl --fail -X POST -H "Authorization: token ${{ secrets.MY_PAT }}" \
