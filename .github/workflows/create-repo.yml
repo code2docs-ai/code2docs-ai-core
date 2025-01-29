@@ -19,6 +19,13 @@ jobs:
           echo "repoUrl: ${{ github.event.inputs.repoUrl }}"
           echo "branchName: ${{ github.event.inputs.branchName }}"
 
+      - name: Validate repoUrl
+        run: |
+          if [[ "${{ github.event.inputs.repoUrl }}" != https://github.com/* ]]; then
+            echo "Error: repoUrl must be a GitHub.com address and a HTTPS address."
+            exit 1
+          fi
+
       - name: Extract orgName and repoName
         id: extract
         run: |

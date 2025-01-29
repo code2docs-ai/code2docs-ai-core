@@ -14,6 +14,7 @@ To use this GitHub Action workflow, follow these steps:
 
 2. The workflow will perform the following steps:
    - Print out the input parameters values in the workflow log.
+   - Validate that the `repoUrl` is a GitHub.com address and a HTTPS address. If not, the job will fail.
    - Extract the `orgName` and `repoName` from the `repoUrl`, and concatenate them to form another parameter `docs_repo_name` = `orgName_repoName`.
    - Check if the repository `docs_repo_name` exists using the GitHub API.
    - If the repository exists, delete it before creating a new one.
