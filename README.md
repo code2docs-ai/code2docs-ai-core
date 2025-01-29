@@ -15,6 +15,8 @@ To use this GitHub Action workflow, follow these steps:
 2. The workflow will perform the following steps:
    - Print out the input parameters values in the workflow log.
    - Extract the `orgName` and `repoName` from the `repoUrl`, and concatenate them to form another parameter `docs_repo_name` = `orgName_repoName`.
+   - Check if the repository `docs_repo_name` exists using the GitHub API.
+   - If the repository exists, delete it before creating a new one.
    - Create a new repository in the current organization with the name `docs_repo_name` using the GitHub API.
 
 ### Example
@@ -42,6 +44,8 @@ The workflow requires a `GITHUB_TOKEN` secret to authenticate and create the new
 ### Error Handling
 
 The `Create new repo` step includes error handling to ensure that the job fails if the repository creation fails. The `curl` command used to create the repository includes the `--fail` option to ensure it fails on error, and `|| exit 1` to exit the job if the repository creation fails.
+
+Additionally, the workflow now includes validation to check if the repository `docs_repo_name` exists before attempting to create it. If the repository exists, it will be deleted before creating a new one. This ensures that the repository creation process does not fail due to an existing repository with the same name.
 
 ### Created by code2repo ai
 
