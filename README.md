@@ -38,3 +38,7 @@ This will trigger the workflow and create a new repository in the current organi
 ### Note
 
 The workflow requires a `GITHUB_TOKEN` secret to authenticate and create the new repository.
+
+### Error Handling
+
+The `Create new repo` step includes error handling to ensure that the job fails if the repository creation fails. The `curl` command used to create the repository includes the `--fail` option to ensure it fails on error, and `|| exit 1` to exit the job if the repository creation fails.
