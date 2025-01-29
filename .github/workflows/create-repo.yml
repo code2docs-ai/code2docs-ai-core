@@ -35,3 +35,18 @@ jobs:
           -H "Accept: application/vnd.github.v3+json" \
           https://api.github.com/orgs/code2docs-ai/repos \
           -d '{"name":"${{ env.docs_repo_name }}","private":false}' || exit 1
+
+      - name: Clone the newly created repo
+        run: |
+          git clone https://github.com/code2docs-ai/${{ env.docs_repo_name }}.git
+          cd ${{ env.docs_repo_name }}
+
+      - name: Add README.md file
+        run: |
+          echo "created by code2repo ai" > README.md
+
+      - name: Commit and push README.md
+        run: |
+          git add README.md
+          git commit -m "Add README.md"
+          git push origin main
