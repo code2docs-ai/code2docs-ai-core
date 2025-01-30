@@ -1,4 +1,4 @@
-name: code2docs-ai agent workflow
+name: code2docs-ai agent job [${{ github.event.inputs.repoUrl }}]
 
 on:
   workflow_dispatch:
