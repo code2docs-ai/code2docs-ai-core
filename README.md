@@ -54,6 +54,28 @@ Additionally, the workflow now includes validation to check if the repository `d
 
 The workflow also includes validation to check if the `repoUrl` exists on GitHub and is publicly accessible. If the `repoUrl` does not exist or is not publicly accessible, the job will fail. This ensures that the repository creation process does not fail due to an invalid or inaccessible `repoUrl`.
 
+### Additional Steps
+
+The workflow now includes additional steps to activate the python environment, run the 'aise-cli' command, and parse the repo using 'aise-cli repo parse-repo':
+
+1. Activate the python environment:
+   ```shell
+   source ~/source/aise-cli/.venv/bin/activate
+   ```
+
+2. Run the 'aise-cli' command to test if the python environment works:
+   ```shell
+   aise-cli
+   ```
+
+3. Delete the source repo and parse the repo using 'aise-cli repo parse-repo':
+   ```shell
+   # delete source repo
+   aise-cli repo delete-repo source_repo
+   # parse repo
+   aise-cli repo parse-repo --repo_path  aise-cli repo parse-repo --repo_name <source_repo absolute>
+   ```
+
 ### Created by code2repo ai
 
 This repository was created by code2repo ai.

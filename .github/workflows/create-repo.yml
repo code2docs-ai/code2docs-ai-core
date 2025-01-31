@@ -92,3 +92,19 @@ jobs:
           cd source_repo
           git remote add new_repo https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/code2docs-ai/${{ env.docs_repo_name }}.git
           git push new_repo ${{ github.event.inputs.branchName }}
+
+      - name: Activate python environment
+        run: |
+          source ~/source/aise-cli/.venv/bin/activate
+
+      - name: Run aise-cli command
+        run: |
+          aise-cli
+
+      - name: Delete source repo
+        run: |
+          aise-cli repo delete-repo source_repo
+
+      - name: Parse repo
+        run: |
+          aise-cli repo parse-repo --repo_name ${{ github.workspace }}/source_repo
