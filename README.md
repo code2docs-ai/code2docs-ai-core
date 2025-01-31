@@ -22,6 +22,7 @@ To use this GitHub Action workflow, follow these steps:
    - Create a new repository in the current organization with the name `docs_repo_name` using the GitHub API.
    - Check if the local directory already exists and remove it if it exists before cloning the repository.
    - Clone the source from `repoUrl` at the end of the workflow.
+   - Clean up the working directory on the runner before running any steps.
 
 ### Example
 
