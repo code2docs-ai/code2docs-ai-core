@@ -98,4 +98,4 @@ jobs:
           source ~/source/aise-cli/.venv/bin/activate
           aise-cli
           aise-cli repo delete-repo source_repo
-          aise-cli repo parse-repo -repo_path ${{ github.workspace }}/source_repo
+          aise-cli repo parse-repo -repo_path ./source_repo
