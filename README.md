@@ -20,6 +20,7 @@ To use this GitHub Action workflow, follow these steps:
    - Check if the repository `docs_repo_name` exists using the GitHub API.
    - If the repository exists, delete it before creating a new one.
    - Create a new repository in the current organization with the name `docs_repo_name` using the GitHub API.
+   - Check if the local directory already exists and remove it if it exists before cloning the repository.
 
 ### Example
 
