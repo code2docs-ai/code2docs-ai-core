@@ -76,9 +76,9 @@ jobs:
           echo "# Docs written by code2docs-ai agent" > README.md
           git config --global user.email "code2docs-ai@leansoftx.com"
           git config --global user.name "code2docs-ai agent"
-          git add README.md
-          git commit -m "Add README.md"
-          git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/code2docs-ai/${{ env.docs_repo_name }}.git main
+          ## git add README.md
+          ## git commit -m "Add README.md"
+          ## git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/code2docs-ai/${{ env.docs_repo_name }}.git main
 
       - name: Check if source_repo exists and delete it
         run: |
