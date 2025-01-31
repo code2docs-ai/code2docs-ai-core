@@ -64,6 +64,9 @@ jobs:
 
       - name: Clone the newly created repo
         run: |
+          if [ -d "${{ env.docs_repo_name }}" ]; then
+            rm -rf ${{ env.docs_repo_name }}
+          fi
           git clone https://github.com/code2docs-ai/${{ env.docs_repo_name }}.git
           cd ${{ env.docs_repo_name }}
           echo "# Docs written by code2docs-ai agent" > README.md
