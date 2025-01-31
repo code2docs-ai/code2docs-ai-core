@@ -15,6 +15,7 @@ To use this GitHub Action workflow, follow these steps:
 2. The workflow will perform the following steps:
    - Print out the input parameters values in the workflow log.
    - Validate that the `repoUrl` is a GitHub.com address and a HTTPS address. If not, the job will fail.
+   - Validate that the `repoUrl` exists on GitHub and is publicly accessible. If not, the job will fail.
    - Extract the `orgName` and `repoName` from the `repoUrl`, and concatenate them to form another parameter `docs_repo_name` = `orgName_repoName`.
    - Check if the repository `docs_repo_name` exists using the GitHub API.
    - If the repository exists, delete it before creating a new one.
@@ -47,6 +48,8 @@ The workflow requires a `GITHUB_TOKEN` secret to authenticate and create the new
 The `Create new repo` step includes error handling to ensure that the job fails if the repository creation fails. The `curl` command used to create the repository includes the `--fail` option to ensure it fails on error, and `|| exit 1` to exit the job if the repository creation fails.
 
 Additionally, the workflow now includes validation to check if the repository `docs_repo_name` exists before attempting to create it. If the repository exists, it will be deleted before creating a new one. This ensures that the repository creation process does not fail due to an existing repository with the same name.
+
+The workflow also includes validation to check if the `repoUrl` exists on GitHub and is publicly accessible. If the `repoUrl` does not exist or is not publicly accessible, the job will fail. This ensures that the repository creation process does not fail due to an invalid or inaccessible `repoUrl`.
 
 ### Created by code2repo ai
 

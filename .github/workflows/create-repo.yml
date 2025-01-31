@@ -25,6 +25,12 @@ jobs:
             echo "Error: repoUrl must be a GitHub.com address and a HTTPS address."
             exit 1
           fi
+          repo_status=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: token ${{ secrets.MY_PAT }}" \
+          "${{ github.event.inputs.repoUrl }}")
+          if [[ "$repo_status" != "200" ]]; then
+            echo "Error: repoUrl does not exist on GitHub or is not publicly accessible."
+            exit 1
+          fi
 
       - name: Extract orgName and repoName
         id: extract
