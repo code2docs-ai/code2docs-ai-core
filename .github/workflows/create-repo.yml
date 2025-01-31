@@ -12,7 +12,7 @@ on:
 
 jobs:
   create-repo:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Print input parameters
         run: |
