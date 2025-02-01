@@ -76,26 +76,24 @@ jobs:
           echo "# Docs written by code2docs-ai agent" > README.md
           git config --global user.email "code2docs-ai@leansoftx.com"
           git config --global user.name "code2docs-ai agent"
-          ## git add README.md
-          ## git commit -m "Add README.md"
-          ## git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/code2docs-ai/${{ env.docs_repo_name }}.git main
+          git add README.md
+          git commit -m "Add README.md"
+          git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/code2docs-ai/${{ env.docs_repo_name }}.git main
 
       - name: Check if source_repo exists and delete it
         run: |
-          if [ -d "source_repo" ]; then
-            rm -rf source_repo
+          if [ -d "${{ env.repoName }}" ]; then
+            rm -rf ${{ env.repoName }}
           fi
 
       - name: Clone the source from repoUrl
         run: |
-          git clone ${{ github.event.inputs.repoUrl }} source_repo
-          cd source_repo
-          git remote add new_repo https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/code2docs-ai/${{ env.docs_repo_name }}.git
-          git push new_repo ${{ github.event.inputs.branchName }}
+          git clone ${{ github.event.inputs.repoUrl }} ${{ env.repoName }}
+          cd ${{ env.repoName }}
 
       - name: Run aise-cli
         run: |
           source ~/source/aise-cli/.venv/bin/activate
           aise-cli
-          aise-cli repo delete-repo source_repo
-          aise-cli repo parse-repo --repo_path ./source_repo
+          aise-cli repo delete-repo ${{ env.repoName }}
+          aise-cli repo parse-repo --repo_path ./${{ env.repoName }}
