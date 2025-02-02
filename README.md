@@ -76,6 +76,13 @@ The workflow now includes additional steps to activate the python environment, r
    aise-cli repo parse-repo --repo_path  aise-cli repo parse-repo --repo_name <source_repo absolute>
    ```
 
-### Created by code2repo ai
+### Storing Workflow Run State
 
-This repository was created by code2repo ai.
+The workflow now includes functionality to store the state of workflow runs in a JSON file named `workflow_runs.json`. This file includes the following values for each workflow run:
+- Workflow run id
+- `repoUrl` and `branchName` from the input parameters
+- `docs_repo_name`
+- Current status and conclusion
+- Workflow run created time
+
+The `workflow_runs.json` file is created or updated during each workflow run, and the new record of the current workflow run is added to the existing content of the file. The file is then committed and pushed to the repository.
