@@ -7,5 +7,14 @@
     "status": "success",
     "conclusion": "",
     "created_at": ""
+  },
+  {
+    "id": "13103514155",
+    "repoUrl": "https://github.com/smartcode-workshops/auto-suggest-java",
+    "branchName": "main",
+    "docs_repo_name": "smartcode-workshops_auto-suggest-java",
+    "status": "success",
+    "conclusion": "",
+    "created_at": ""
   }
 ]
