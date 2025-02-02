@@ -49,7 +49,7 @@ jobs:
       - name: Clone the current repository and store workflow run states
         run: |
           git clone https://github.com/${{ github.repository }}.git
-          cd ${{ github.repository }}
+          cd code2docs-ai-core
           if [ ! -f workflow_runs.json ]; then
             echo "[]" > workflow_runs.json
           fi
