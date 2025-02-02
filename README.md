@@ -85,4 +85,4 @@ The workflow now includes functionality to store the state of workflow runs in a
 - Current status and conclusion
 - Workflow run created time
 
-The `workflow_runs.json` file is created or updated during each workflow run, and the new record of the current workflow run is added to the existing content of the file. The file is then committed and pushed to the repository.
+The `workflow_runs.json` file is created or updated during each workflow run, and the new record of the current workflow run is added to the top of the existing content of the file. The file is then committed and pushed to the repository.
