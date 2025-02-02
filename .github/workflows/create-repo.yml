@@ -88,7 +88,7 @@ jobs:
 
       - name: Clone the source from repoUrl
         run: |
-          git clone ${{ github.event.inputs.repoUrl }} ${{ env.repoName }}
+          git clone --branch ${{ github.event.inputs.branchName }} ${{ github.event.inputs.repoUrl }} ${{ env.repoName }}
           cd ${{ env.repoName }}
 
       - name: Run aise-cli
@@ -105,4 +105,3 @@ jobs:
           git add .
           git commit -m "Generate document for ${{ env.repoName }}"
           git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/code2docs-ai/${{ env.docs_repo_name }}.git main
-
