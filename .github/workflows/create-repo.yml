@@ -54,7 +54,7 @@ jobs:
             echo "[]" > workflow_runs.json
           fi
           workflow_run=$(jq -n --arg id "${{ github.run_id }}" --arg repoUrl "${{ github.event.inputs.repoUrl }}" --arg branchName "${{ github.event.inputs.branchName }}" --arg docs_repo_name "${{ env.docs_repo_name }}" --arg status "${{ job.status }}" --arg conclusion "${{ job.conclusion }}" --arg created_at "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" '{id: $id, repoUrl: $repoUrl, branchName: $branchName, docs_repo_name: $docs_repo_name, status: $status, conclusion: $conclusion, created_at: $created_at}')
-          jq ". += [$workflow_run]" workflow_runs.json > tmp.json && mv tmp.json workflow_runs.json
+          jq ". = [$workflow_run] + ." workflow_runs.json > tmp.json && mv tmp.json workflow_runs.json
           git config --global user.email "code2docs-ai@leansoftx.com"
           git config --global user.name "code2docs-ai agent"
           git add workflow_runs.json
