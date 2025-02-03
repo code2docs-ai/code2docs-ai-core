@@ -121,4 +121,12 @@ jobs:
           git add .
           git commit -m "Generate document for ${{ env.repoName }}"
           git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/code2docs-ai/${{ env.docs_repo_name }}.git main
-          
+
+      - name: Update workflow run state
+        run: |
+          cd code2docs-ai-core
+          workflow_run=$(jq --arg id "${{ github.run_id }}" --arg status "completed" --arg completed_at "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" 'map(if .id == $id then .status = $status | .completed_at = $completed_at else . end)' workflow_runs.json)
+          echo "$workflow_run" > workflow_runs.json
+          git add workflow_runs.json
+          git commit -m "Update workflow_runs.json with completed status"
+          git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/${{ github.repository }}.git main
