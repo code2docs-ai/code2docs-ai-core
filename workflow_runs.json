@@ -6,7 +6,9 @@
     "docs_repo_name": "ups216_photos-sample",
     "status": "completed",
     "created_at": "2025-02-06T04:06:29Z",
-    "completed_at": "2025-02-06T04:08:40Z"
+    "completed_at": "2025-02-06T04:08:40Z",
+    "file_count": 0,
+    "latest_commit_id": "placeholder"
   },
   {
     "id": "13168127449",
@@ -15,7 +17,9 @@
     "docs_repo_name": "smartcode-workshops_auto-suggest-java",
     "status": "completed",
     "created_at": "2025-02-05T22:57:53Z",
-    "completed_at": "2025-02-05T23:01:32Z"
+    "completed_at": "2025-02-05T23:01:32Z",
+    "file_count": 0,
+    "latest_commit_id": "placeholder"
   },
   {
     "id": "13153191234",
@@ -24,7 +28,9 @@
     "docs_repo_name": "fake_banking-smaple",
     "status": "completed",
     "created_at": "2025-02-06T07:40:44Z",
-    "completed_at": "2025-02-06T07:45:44Z"
+    "completed_at": "2025-02-06T07:45:44Z",
+    "file_count": 0,
+    "latest_commit_id": "placeholder"
   },
   {
     "id": "13153191234",
@@ -33,7 +39,9 @@
     "docs_repo_name": "fake_photos-boathouse-backend",
     "status": "completed",
     "created_at": "2025-02-06T07:27:44Z",
-    "completed_at": "2025-02-06T07:30:44Z"
+    "completed_at": "2025-02-06T07:30:44Z",
+    "file_count": 0,
+    "latest_commit_id": "placeholder"
   },
   {
     "id": "13153191234",
@@ -42,7 +50,9 @@
     "docs_repo_name": "fake_crm-core",
     "status": "completed",
     "created_at": "2025-02-06T10:40:44Z",
-    "completed_at": "2025-02-06T10:45:44Z"
+    "completed_at": "2025-02-06T10:45:44Z",
+    "file_count": 0,
+    "latest_commit_id": "placeholder"
   },
   {
     "id": "13153191234",
@@ -51,7 +61,9 @@
     "docs_repo_name": "ups216_crm-core",
     "status": "completed",
     "created_at": "2025-02-06T09:40:44Z",
-    "completed_at": "2025-02-06T09:45:44Z"
+    "completed_at": "2025-02-06T09:45:44Z",
+    "file_count": 0,
+    "latest_commit_id": "placeholder"
   },
   {
     "id": "13153191234",
@@ -60,7 +72,9 @@
     "docs_repo_name": "ups216_banking-smaple",
     "status": "completed",
     "created_at": "2025-02-06T08:40:44Z",
-    "completed_at": "2025-02-06T08:45:44Z"
+    "completed_at": "2025-02-06T08:45:44Z",
+    "file_count": 0,
+    "latest_commit_id": "placeholder"
   },
   {
     "id": "13153191234",
@@ -69,7 +83,9 @@
     "docs_repo_name": "ups216_photos-boathouse-backend",
     "status": "completed",
     "created_at": "2025-02-06T08:27:44Z",
-    "completed_at": "2025-02-06T08:30:44Z"
+    "completed_at": "2025-02-06T08:30:44Z",
+    "file_count": 0,
+    "latest_commit_id": "placeholder"
   },
   {
     "id": "13153183412",
@@ -78,7 +94,9 @@
     "docs_repo_name": "ups216_photos-sample",
     "status": "completed",
     "created_at": "2025-02-05T08:27:44Z",
-    "completed_at": "2025-02-05T08:30:44Z"
+    "completed_at": "2025-02-05T08:30:44Z",
+    "file_count": 0,
+    "latest_commit_id": "placeholder"
   },
   {
     "id": "13147547741",
@@ -87,7 +105,9 @@
     "docs_repo_name": "smartcode-workshops_auto-suggest-python",
     "status": "completed",
     "created_at": "2025-02-05T00:29:01Z",
-    "completed_at": "2025-02-05T00:40:23Z"
+    "completed_at": "2025-02-05T00:40:23Z",
+    "file_count": 0,
+    "latest_commit_id": "placeholder"
   },
   {
     "id": "13147217080",
@@ -96,7 +116,9 @@
     "docs_repo_name": "smartcode-workshops_auto-suggest-chsarp",
     "status": "completed",
     "created_at": "2025-02-05T00:03:42Z",
-    "completed_at": "2025-02-05T00:11:31Z"
+    "completed_at": "2025-02-05T00:11:31Z",
+    "file_count": 0,
+    "latest_commit_id": "placeholder"
   },
   {
     "id": "13147135324",
@@ -105,7 +127,9 @@
     "docs_repo_name": "smartcode-workshops_auto-suggest-js",
     "status": "completed",
     "created_at": "2025-02-04T23:56:02Z",
-    "completed_at": "2025-02-05T00:00:27Z"
+    "completed_at": "2025-02-05T00:00:27Z",
+    "file_count": 0,
+    "latest_commit_id": "placeholder"
   },
   {
     "id": "13146864709",
@@ -114,7 +138,9 @@
     "docs_repo_name": "smartcode-workshops_auto-suggest-cpp",
     "status": "completed",
     "created_at": "2025-02-04T23:31:35Z",
-    "completed_at": "2025-02-04T23:35:11Z"
+    "completed_at": "2025-02-04T23:35:11Z",
+    "file_count": 0,
+    "latest_commit_id": "placeholder"
   },
   {
     "id": "13126169349",
@@ -123,6 +149,8 @@
     "docs_repo_name": "smartcode-workshops_auto-suggest-ts",
     "status": "completed",
     "created_at": "2025-02-04T01:08:14Z",
-    "completed_at": "2025-02-04T01:19:07Z"
+    "completed_at": "2025-02-04T01:19:07Z",
+    "file_count": 0,
+    "latest_commit_id": "placeholder"
   }
 ]
