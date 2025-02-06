@@ -106,6 +106,15 @@ jobs:
         run: |
           git clone --branch ${{ github.event.inputs.branchName }} ${{ github.event.inputs.repoUrl }} ${{ env.repoName }}
           cd ${{ env.repoName }}
+          file_count=$(find . -type f | wc -l)
+          latest_commit_id=$(git rev-parse HEAD)
+          cd ..
+          cd code2docs-ai-core
+          workflow_run=$(jq --arg id "${{ github.run_id }}" --arg file_count "$file_count" --arg latest_commit_id "$latest_commit_id" 'map(if .id == $id then .file_count = $file_count | .latest_commit_id = $latest_commit_id else . end)' workflow_runs.json)
+          echo "$workflow_run" > workflow_runs.json
+          git add workflow_runs.json
+          git commit -m "Update workflow_runs.json with file_count and latest_commit_id"
+          git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/${{ github.repository }}.git main
 
       - name: Run aise-cli
         run: |
