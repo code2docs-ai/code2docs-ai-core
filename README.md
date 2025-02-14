@@ -1,5 +1,7 @@
 # code2docs-ai-core
 
+[Chinese Version](README_CN.md)
+
 ## GitHub Action: Code2Docs-ai Agent Workflow
 
 This repository contains a GitHub Action workflow that allows you to create a new repository in the current organization based on an input repository URL.
