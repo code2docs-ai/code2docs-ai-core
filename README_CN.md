@@ -4,6 +4,9 @@
 
 ## GitHub Action: Code2Docs-ai Agent Workflow
 
+![smartchat-mermaid-png-20250215073808](https://github.com/user-attachments/assets/900539d4-4ada-4105-9af9-8cc486f55da7)
+
+
 本仓库包含一个 GitHub Action 工作流，允许您基于输入的存储库 URL 在当前组织中创建一个新存储库。
 
 ### 使用方法
