@@ -1,8 +1,11 @@
 # code2docs-ai-core
 
-[Chinese Version](README_CN.md)
+[中文](README_CN.md)
 
 ## GitHub Action: Code2Docs-ai Agent Workflow
+
+![smartchat-mermaid-png-20250215073808](https://github.com/user-attachments/assets/b8df2d62-bdb6-42ea-a7c4-6bf394a7f6d0)
+
 
 This repository contains a GitHub Action workflow that allows you to create a new repository in the current organization based on an input repository URL.
 
