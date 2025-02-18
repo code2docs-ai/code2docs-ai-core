@@ -119,7 +119,7 @@ jobs:
       - name: Run aise-cli
         run: |
           source ~/source/aise-cli/.venv/bin/activate
-          aise-cli --config_file /home/azureuser/source/_temp/aise_cli_config.json
+          aise-cli --config_file /home/azureuser/source/_temp/aise_cli_config.json info
           aise-cli --config_file /home/azureuser/source/_temp/aise_cli_config.json repo delete-repo ${{ env.repoName }}
           aise-cli --config_file /home/azureuser/source/_temp/aise_cli_config.json repo parse-repo --repo_path ./${{ env.repoName }}
           cd ${{ env.docs_repo_name }}
