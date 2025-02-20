@@ -5,7 +5,9 @@
     "branchName": "main",
     "docs_repo_name": "smartcode-workshops_auto-suggest-java",
     "status": "in_progress",
-    "created_at": "2025-02-20T11:56:14Z"
+    "created_at": "2025-02-20T11:56:14Z",
+    "file_count": "38",
+    "latest_commit_id": "68498648b8badfe50f2ec08f64aed03b833907a0"
   },
   {
     "id": "13434594058",
