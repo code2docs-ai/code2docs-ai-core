@@ -1,5 +1,13 @@
 [
   {
+    "id": "13427581578",
+    "repoUrl": "https://github.com/smartcode-workshops/auto-suggest-java",
+    "branchName": "main",
+    "docs_repo_name": "smartcode-workshops_auto-suggest-java",
+    "status": "in_progress",
+    "created_at": "2025-02-20T03:59:31Z"
+  },
+  {
     "id": "13427555917",
     "repoUrl": "https://github.com/smartcode-workshops/auto-suggest-java",
     "branchName": "main",
