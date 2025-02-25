@@ -1,5 +1,13 @@
 [
   {
+    "id": "13511305517",
+    "repoUrl": "https://github.com/Azure-Samples/azure-search-openai-demo",
+    "branchName": "main",
+    "docs_repo_name": "Azure-Samples_azure-search-openai-demo",
+    "status": "in_progress",
+    "created_at": "2025-02-25T01:06:13Z"
+  },
+  {
     "id": "13448507149",
     "repoUrl": "https://github.com/smartcode-workshops/auto-suggest-java",
     "branchName": "main",
