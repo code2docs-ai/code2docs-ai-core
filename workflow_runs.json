@@ -4,10 +4,11 @@
     "repoUrl": "https://github.com/Azure-Samples/azure-search-openai-demo",
     "branchName": "main",
     "docs_repo_name": "Azure-Samples_azure-search-openai-demo",
-    "status": "in_progress",
+    "status": "completed",
     "created_at": "2025-02-25T01:06:13Z",
     "file_count": "479",
-    "latest_commit_id": "31ea846b06002c68cb3f44e91c69de4c769f2bf9"
+    "latest_commit_id": "31ea846b06002c68cb3f44e91c69de4c769f2bf9",
+    "completed_at": "2025-02-25T01:07:29Z"
   },
   {
     "id": "13448507149",
