@@ -5,7 +5,9 @@
     "branchName": "main",
     "docs_repo_name": "Azure-Samples_azure-search-openai-demo",
     "status": "in_progress",
-    "created_at": "2025-03-13T01:45:57Z"
+    "created_at": "2025-03-13T01:45:57Z",
+    "file_count": "479",
+    "latest_commit_id": "bb9492fb46e7d27b4c04361bf6d6a55b9035ffb9"
   },
   {
     "id": "13824951374",
