@@ -22,14 +22,6 @@
     "completed_at": "2025-03-14T11:46:37Z"
   },
   {
-    "id": "13855846463",
-    "repoUrl": "https://github.com/smartcode-workshops/auto-suggest-java",
-    "branchName": "main",
-    "docs_repo_name": "smartcode-workshops_auto-suggest-java",
-    "status": "in_progress",
-    "created_at": "2025-03-14T11:44:36Z"
-  },
-  {
     "id": "13855846461",
     "repoUrl": "https://github.com/smartcode-workshops/auto-suggest-java",
     "branchName": "main",
@@ -74,92 +66,12 @@
     "completed_at": "2025-03-14T10:17:01Z"
   },
   {
-    "id": "13854186089",
-    "repoUrl": "https://github.com/ups216/auto-suggest-java-demo",
-    "branchName": "main",
-    "docs_repo_name": "ups216_auto-suggest-java-demo",
-    "status": "in_progress",
-    "created_at": "2025-03-14T09:59:56Z",
-    "file_count": "38",
-    "latest_commit_id": "68498648b8badfe50f2ec08f64aed03b833907a0"
-  },
-  {
-    "id": "13854157958",
-    "repoUrl": "https://github.com/ups216/auto-suggest-java-demo",
-    "branchName": "main",
-    "docs_repo_name": "ups216_auto-suggest-java-demo",
-    "status": "in_progress",
-    "created_at": "2025-03-14T09:57:54Z",
-    "file_count": "38",
-    "latest_commit_id": "68498648b8badfe50f2ec08f64aed03b833907a0"
-  },
-  {
     "id": "13854087807",
     "repoUrl": "https://github.com/ups216/auto-suggest-java-demo",
     "branchName": "main",
     "docs_repo_name": "ups216_auto-suggest-java-demo",
     "status": "in_progress",
     "created_at": "2025-03-14T09:53:12Z",
-    "file_count": "38",
-    "latest_commit_id": "68498648b8badfe50f2ec08f64aed03b833907a0"
-  },
-  {
-    "id": "13853930445",
-    "repoUrl": "https://github.com/ups216/auto-suggest-java-demo",
-    "branchName": "main",
-    "docs_repo_name": "ups216_auto-suggest-java-demo",
-    "status": "in_progress",
-    "created_at": "2025-03-14T09:43:11Z",
-    "file_count": "38",
-    "latest_commit_id": "68498648b8badfe50f2ec08f64aed03b833907a0"
-  },
-  {
-    "id": "13853816448",
-    "repoUrl": "https://github.com/ups216/auto-suggest-java-demo",
-    "branchName": "main",
-    "docs_repo_name": "ups216_auto-suggest-java-demo",
-    "status": "in_progress",
-    "created_at": "2025-03-14T09:36:26Z",
-    "file_count": "38",
-    "latest_commit_id": "68498648b8badfe50f2ec08f64aed03b833907a0"
-  },
-  {
-    "id": "13852583090",
-    "repoUrl": "https://github.com/ups216/auto-suggest-java-demo",
-    "branchName": "main",
-    "docs_repo_name": "ups216_auto-suggest-java-demo",
-    "status": "in_progress",
-    "created_at": "2025-03-14T08:21:22Z",
-    "file_count": "38",
-    "latest_commit_id": "68498648b8badfe50f2ec08f64aed03b833907a0"
-  },
-  {
-    "id": "13829692532",
-    "repoUrl": "https://github.com/ups216/auto-suggest-java-demo",
-    "branchName": "main",
-    "docs_repo_name": "ups216_auto-suggest-java-demo",
-    "status": "in_progress",
-    "created_at": "2025-03-13T07:58:01Z",
-    "file_count": "38",
-    "latest_commit_id": "68498648b8badfe50f2ec08f64aed03b833907a0"
-  },
-  {
-    "id": "13824962619",
-    "repoUrl": "https://github.com/Azure-Samples/azure-search-openai-demo",
-    "branchName": "main",
-    "docs_repo_name": "Azure-Samples_azure-search-openai-demo",
-    "status": "in_progress",
-    "created_at": "2025-03-13T01:45:57Z",
-    "file_count": "479",
-    "latest_commit_id": "bb9492fb46e7d27b4c04361bf6d6a55b9035ffb9"
-  },
-  {
-    "id": "13824951374",
-    "repoUrl": "https://github.com/ups216/auto-suggest-java-demo",
-    "branchName": "main",
-    "docs_repo_name": "ups216_auto-suggest-java-demo",
-    "status": "in_progress",
-    "created_at": "2025-03-13T01:25:58Z",
     "file_count": "38",
     "latest_commit_id": "68498648b8badfe50f2ec08f64aed03b833907a0"
   },
