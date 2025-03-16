@@ -1,5 +1,13 @@
 [
   {
+    "id": "13879208434",
+    "repoUrl": "https://github.com/ups216/ruoyi-quartz",
+    "branchName": "main",
+    "docs_repo_name": "ups216_ruoyi-quartz",
+    "status": "in_progress",
+    "created_at": "2025-03-16T04:37:10Z"
+  },
+  {
     "id": "13879207450",
     "repoUrl": "https://github.com/ups216/ruoyi-generator",
     "branchName": "main",
