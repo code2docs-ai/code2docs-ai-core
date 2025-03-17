@@ -11,30 +11,6 @@
     "completed_at": "2025-03-16T09:44:44Z"
   },
   {
-    "id": "13881922549",
-    "repoUrl": "https://github.com/idcf-boat-house/boat-house-backend",
-    "branchName": "main",
-    "docs_repo_name": "idcf-boat-house_boat-house-backend",
-    "status": "in_progress",
-    "created_at": "2025-03-16T09:17:21Z"
-  },
-  {
-    "id": "13881920959",
-    "repoUrl": "https://github.com/idcf-boat-house/boat-house-backend",
-    "branchName": "main",
-    "docs_repo_name": "idcf-boat-house_boat-house-backend",
-    "status": "in_progress",
-    "created_at": "2025-03-16T09:17:02Z"
-  },
-  {
-    "id": "13881702724",
-    "repoUrl": "https://github.com/idcf-boat-house/boat-house-backend",
-    "branchName": "main",
-    "docs_repo_name": "idcf-boat-house_boat-house-backend",
-    "status": "in_progress",
-    "created_at": "2025-03-16T08:47:22Z"
-  },
-  {
     "id": "13879208434",
     "repoUrl": "https://github.com/ups216/ruoyi-quartz",
     "branchName": "main",
