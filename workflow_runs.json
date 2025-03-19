@@ -4,10 +4,11 @@
     "repoUrl": "https://github.com/spring-guides/gs-spring-boot",
     "branchName": "main",
     "docs_repo_name": "spring-guides_gs-spring-boot",
-    "status": "in_progress",
+    "status": "completed",
     "created_at": "2025-03-19T09:00:04Z",
     "file_count": "62",
-    "latest_commit_id": "06f0444cf7de85de24128926504fc2f5f1b61e49"
+    "latest_commit_id": "06f0444cf7de85de24128926504fc2f5f1b61e49",
+    "completed_at": "2025-03-19T09:02:36Z"
   },
   {
     "id": "13941285645",
