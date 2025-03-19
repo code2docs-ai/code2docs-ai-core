@@ -46,22 +46,6 @@ jobs:
           docs_repo_name="${orgName}_${repoName}"
           echo "docs_repo_name=$docs_repo_name" >> $GITHUB_ENV
 
-      - name: Clone the current repository and store workflow run states
-        run: |
-          git clone https://github.com/${{ github.repository }}.git
-          cd code2docs-ai-core
-          if [ ! -f workflow_runs.json ]; then
-            echo "[]" > workflow_runs.json
-          fi
-          workflow_run=$(jq -n --arg id "${{ github.run_id }}" --arg repoUrl "${{ github.event.inputs.repoUrl }}" --arg branchName "${{ github.event.inputs.branchName }}" --arg docs_repo_name "${{ env.docs_repo_name }}" --arg status "in_progress"  --arg created_at "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" '{id: $id, repoUrl: $repoUrl, branchName: $branchName, docs_repo_name: $docs_repo_name, status: $status, created_at: $created_at}')
-          jq ". = [$workflow_run] + ." workflow_runs.json > tmp.json && mv tmp.json workflow_runs.json
-          git config --global user.email "code2docs-ai@leansoftx.com"
-          git config --global user.name "code2docs-ai agent"
-          git add workflow_runs.json
-          git commit -m "Update workflow_runs.json"
-          git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/${{ github.repository }}.git main
-
-
       - name: Check if repo exists
         id: check-repo
         run: |
@@ -114,6 +98,21 @@ jobs:
           echo "$workflow_run" > workflow_runs.json
           git add workflow_runs.json
           git commit -m "Update workflow_runs.json with file_count and latest_commit_id"
+          git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/${{ github.repository }}.git main
+
+      - name: Clone the current repository and store workflow run states
+        run: |
+          git clone https://github.com/${{ github.repository }}.git
+          cd code2docs-ai-core
+          if [ ! -f workflow_runs.json ]; then
+            echo "[]" > workflow_runs.json
+          fi
+          workflow_run=$(jq -n --arg id "${{ github.run_id }}" --arg repoUrl "${{ github.event.inputs.repoUrl }}" --arg branchName "${{ github.event.inputs.branchName }}" --arg docs_repo_name "${{ env.docs_repo_name }}" --arg status "in_progress"  --arg created_at "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" '{id: $id, repoUrl: $repoUrl, branchName: $branchName, docs_repo_name: $docs_repo_name, status: $status, created_at: $created_at}')
+          jq ". = [$workflow_run] + ." workflow_runs.json > tmp.json && mv tmp.json workflow_runs.json
+          git config --global user.email "code2docs-ai@leansoftx.com"
+          git config --global user.name "code2docs-ai agent"
+          git add workflow_runs.json
+          git commit -m "Update workflow_runs.json"
           git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/${{ github.repository }}.git main
 
       - name: Run aise-cli
