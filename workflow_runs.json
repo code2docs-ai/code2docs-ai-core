@@ -5,7 +5,9 @@
     "branchName": "main",
     "docs_repo_name": "spring-guides_gs-spring-boot",
     "status": "in_progress",
-    "created_at": "2025-03-19T09:00:04Z"
+    "created_at": "2025-03-19T09:00:04Z",
+    "file_count": "62",
+    "latest_commit_id": "06f0444cf7de85de24128926504fc2f5f1b61e49"
   },
   {
     "id": "13941285645",
