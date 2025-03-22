@@ -5,7 +5,9 @@
     "branchName": "main",
     "docs_repo_name": "open-erp-systems_erp-backend",
     "status": "in_progress",
-    "created_at": "2025-03-22T06:16:50Z"
+    "created_at": "2025-03-22T06:16:50Z",
+    "file_count": "141",
+    "latest_commit_id": "27bdff119de726061981f3e2cf66f2da1e5357e0"
   },
   {
     "id": "13986564372",
