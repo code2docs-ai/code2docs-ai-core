@@ -5,7 +5,9 @@
     "branchName": "main",
     "docs_repo_name": "alibaba_spring-ai-alibaba",
     "status": "in_progress",
-    "created_at": "2025-03-26T12:54:47Z"
+    "created_at": "2025-03-26T12:54:47Z",
+    "file_count": "1000",
+    "latest_commit_id": "24538948c53c48902d9fdeedaa004cae2ec86e58"
   },
   {
     "id": "14081598053",
