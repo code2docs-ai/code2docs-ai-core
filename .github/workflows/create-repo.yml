@@ -117,15 +117,21 @@ jobs:
 
       - name: Run aise-cli
         run: |
-          source /data/source/aise-cli/.venv/bin/activate
-          aise-cli --config_file /data/source/_temp/aise_cli_config.json version
-          aise-cli --config_file /data/source/_temp/aise_cli_config.json repo delete-repo ${{ env.repoName }}
-          aise-cli --config_file /data/source/_temp/aise_cli_config.json repo parse-repo --repo_path ./${{ env.repoName }}
+          # source /data/source/aise-cli/.venv/bin/activate
+          # aise-cli --config_file /data/source/_temp/aise_cli_config.json version
+          # aise-cli --config_file /data/source/_temp/aise_cli_config.json repo delete-repo ${{ env.repoName }}
+          # aise-cli --config_file /data/source/_temp/aise_cli_config.json repo parse-repo --repo_path ./${{ env.repoName }}
+          cd /data/source/aise-cli
+          source ./.venv/bin/activate
+          aise-cli  version
+          aise-cli  repo delete-repo ${{ env.repoName }}
+          aise-cli  repo parse-repo --repo_path ./${{ env.repoName }}
           cd ${{ env.docs_repo_name }}
           mkdir docs
           cd docs
           mkdir ${{ env.repoName }}
-          aise-cli --config_file /data/source/_temp/aise_cli_config.json repo export-docs --repo_name ${{ env.repoName }} --output_path ./docs/${{ env.repoName }}
+          # aise-cli --config_file /data/source/_temp/aise_cli_config.json repo export-docs --repo_name ${{ env.repoName }} --output_path ./docs/${{ env.repoName }}
+          aise-cli  repo export-docs --repo_name ${{ env.repoName }} --output_path ./docs/${{ env.repoName }}
           git add .
           git commit -m "Generate document for ${{ env.repoName }}"
           git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/code2docs-ai/${{ env.docs_repo_name }}.git main
