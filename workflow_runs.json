@@ -5,7 +5,9 @@
     "branchName": "main",
     "docs_repo_name": "signalapp_Signal-Server",
     "status": "in_progress",
-    "created_at": "2025-03-27T23:38:22Z"
+    "created_at": "2025-03-27T23:38:22Z",
+    "file_count": "1210",
+    "latest_commit_id": "c2e3ab832cdc8efaa7857fb9691dbc37818c42ef"
   },
   {
     "id": "14103818439",
