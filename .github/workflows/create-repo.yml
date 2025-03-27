@@ -121,6 +121,7 @@ jobs:
           # aise-cli --config_file /data/source/_temp/aise_cli_config.json version
           # aise-cli --config_file /data/source/_temp/aise_cli_config.json repo delete-repo ${{ env.repoName }}
           # aise-cli --config_file /data/source/_temp/aise_cli_config.json repo parse-repo --repo_path ./${{ env.repoName }}
+          pwd
           cd /data/source/aise-cli
           source ./.venv/bin/activate
           aise-cli  version
