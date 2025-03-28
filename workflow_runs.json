@@ -1,15 +1,5 @@
 [
   {
-    "id": "14123918846",
-    "repoUrl": "https://github.com/PaperMC/Paper",
-    "branchName": "main",
-    "docs_repo_name": "PaperMC_Paper",
-    "status": "in_progress",
-    "created_at": "2025-03-28T07:17:55Z",
-    "file_count": "4276",
-    "latest_commit_id": "9b1798d6438107fdf0d5939b79a8cf71f4d16e2c"
-  },
-  {
     "id": "14118733572",
     "repoUrl": "https://github.com/signalapp/Signal-Server",
     "branchName": "main",
@@ -32,36 +22,6 @@
     "completed_at": "2025-03-27T14:17:53Z"
   },
   {
-    "id": "14100068785",
-    "repoUrl": "https://github.com/alibaba/spring-ai-alibaba",
-    "branchName": "main",
-    "docs_repo_name": "alibaba_spring-ai-alibaba",
-    "status": "in_progress",
-    "created_at": "2025-03-27T06:11:27Z",
-    "file_count": "1003",
-    "latest_commit_id": "05284babb3601052d2f194bef404e49749a96ca8"
-  },
-  {
-    "id": "14099981551",
-    "repoUrl": "https://github.com/alibaba/spring-ai-alibaba",
-    "branchName": "main",
-    "docs_repo_name": "alibaba_spring-ai-alibaba",
-    "status": "in_progress",
-    "created_at": "2025-03-27T06:05:27Z",
-    "file_count": "1003",
-    "latest_commit_id": "05284babb3601052d2f194bef404e49749a96ca8"
-  },
-  {
-    "id": "14099786104",
-    "repoUrl": "https://github.com/alibaba/spring-ai-alibaba",
-    "branchName": "main",
-    "docs_repo_name": "alibaba_spring-ai-alibaba",
-    "status": "in_progress",
-    "created_at": "2025-03-27T05:48:13Z",
-    "file_count": "1003",
-    "latest_commit_id": "8c053ce3565bffaeea5eae284c947b1d88fa3621"
-  },
-  {
     "id": "14097925434",
     "repoUrl": "https://github.com/alibaba/spring-ai-alibaba",
     "branchName": "main",
@@ -70,66 +30,6 @@
     "created_at": "2025-03-27T03:03:24Z",
     "file_count": "1003",
     "latest_commit_id": "8c053ce3565bffaeea5eae284c947b1d88fa3621"
-  },
-  {
-    "id": "14096306121",
-    "repoUrl": "https://github.com/alibaba/spring-ai-alibaba",
-    "branchName": "main",
-    "docs_repo_name": "alibaba_spring-ai-alibaba",
-    "status": "in_progress",
-    "created_at": "2025-03-27T00:41:52Z",
-    "file_count": "1000",
-    "latest_commit_id": "cf2ef96f3c835cd8e6834e838754c9e68b1cc719"
-  },
-  {
-    "id": "14085358899",
-    "repoUrl": "https://github.com/alibaba/spring-ai-alibaba",
-    "branchName": "main",
-    "docs_repo_name": "alibaba_spring-ai-alibaba",
-    "status": "in_progress",
-    "created_at": "2025-03-26T14:07:51Z",
-    "file_count": "1000",
-    "latest_commit_id": "cf2ef96f3c835cd8e6834e838754c9e68b1cc719"
-  },
-  {
-    "id": "14083795371",
-    "repoUrl": "https://github.com/alibaba/spring-ai-alibaba",
-    "branchName": "main",
-    "docs_repo_name": "alibaba_spring-ai-alibaba",
-    "status": "in_progress",
-    "created_at": "2025-03-26T12:54:47Z",
-    "file_count": "1000",
-    "latest_commit_id": "24538948c53c48902d9fdeedaa004cae2ec86e58"
-  },
-  {
-    "id": "14081598053",
-    "repoUrl": "https://github.com/alibaba/spring-ai-alibaba",
-    "branchName": "main",
-    "docs_repo_name": "alibaba_spring-ai-alibaba",
-    "status": "in_progress",
-    "created_at": "2025-03-26T10:58:43Z",
-    "file_count": "997",
-    "latest_commit_id": "2c843544c43722b49c38feb5e79a41aafc8aee2b"
-  },
-  {
-    "id": "14077779524",
-    "repoUrl": "https://github.com/alibaba/spring-ai-alibaba",
-    "branchName": "main",
-    "docs_repo_name": "alibaba_spring-ai-alibaba",
-    "status": "in_progress",
-    "created_at": "2025-03-26T07:30:08Z",
-    "file_count": "997",
-    "latest_commit_id": "2c843544c43722b49c38feb5e79a41aafc8aee2b"
-  },
-  {
-    "id": "14071954967",
-    "repoUrl": "https://github.com/alibaba/spring-ai-alibaba",
-    "branchName": "main",
-    "docs_repo_name": "alibaba_spring-ai-alibaba",
-    "status": "in_progress",
-    "created_at": "2025-03-25T23:19:25Z",
-    "file_count": "997",
-    "latest_commit_id": "2c843544c43722b49c38feb5e79a41aafc8aee2b"
   },
   {
     "id": "14032754359",
