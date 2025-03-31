@@ -5,7 +5,9 @@
     "branchName": "main",
     "docs_repo_name": "ups216_openai-java",
     "status": "in_progress",
-    "created_at": "2025-03-31T06:27:43Z"
+    "created_at": "2025-03-31T06:27:43Z",
+    "file_count": "994",
+    "latest_commit_id": "a33431da1f3b7f99929965b7f7caf59ebb351c46"
   },
   {
     "id": "14133606299",
