@@ -27,6 +27,7 @@ jobs:
           echo "repoUrl: ${{ github.event.inputs.repoUrl }}"
           echo "branchName: ${{ github.event.inputs.branchName }}"
           echo "serverEndPoint: ${{ github.event.inputs.serverEndPoint }}"
+          echo "repoVersionId: ${{ github.event.inputs.repoVersionId }}"
       - name: Validate repoUrl
         run: |
           if [[ "${{ github.event.inputs.repoUrl }}" != https://github.com/* ]]; then
@@ -121,9 +122,9 @@ jobs:
           # git commit -m "Update workflow_runs.json with file_count and latest_commit_id"
           # git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/${{ github.repository }}.git main
           
-          echo "${{ github.event.inputs.serverEndPoint }}/github/update/repo-versions"
+          echo "${{ github.event.inputs.serverEndPoint }}"/github/update/repo-versions
           
-          curl --fail -k -X POST "${{ github.event.inputs.serverEndPoint }}"/github/update/repo-versions \
+          curl --fail -k -X POST ${{ github.event.inputs.serverEndPoint }}/github/update/repo-versions \
           -H "Content-Type: application/json" \
           -d '{
                 "id": "${{ github.event.inputs.repoVersionId }}",
