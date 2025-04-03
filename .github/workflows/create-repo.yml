@@ -125,7 +125,7 @@ jobs:
           git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/${{ github.repository }}.git main
 
       - name: Install jq
-          run: sudo apt-get install -y jq
+        run: sudo apt-get install -y jq
 
       - name: Update repo versions
         env:
