@@ -123,14 +123,14 @@ jobs:
           # git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/${{ github.repository }}.git main
           
           echo "${{ github.event.inputs.serverEndPoint }}"/github/update/repo-versions
-          
+          echo "$file_count"
           curl --fail -k -X POST ${{ github.event.inputs.serverEndPoint }}/github/update/repo-versions \
           -H "Content-Type: application/json" \
           -d '{
                 "id": "${{ github.event.inputs.repoVersionId }}",
                 "workflow_id": "${{ github.run_id }}",
                 "status": "in_progress(parse-repo)",
-                "file_count": "$file_count",
+                "file_count": "${{file_count}}",
                 "current_commit_id": "$latest_commit_id"
               }' || exit 1
 
