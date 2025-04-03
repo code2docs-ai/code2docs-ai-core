@@ -195,7 +195,7 @@ jobs:
           DATA=$(jq -n \
             --arg id "$REPO_VERSION_ID" \
             --arg status "completed" \
-            --arg doc_url "$DOC_URL" \
+            --arg docs_url "$DOCS_URL" \
             --arg completed_at "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
             '{
               id: $id,
