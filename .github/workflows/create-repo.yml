@@ -113,16 +113,15 @@ jobs:
           latest_commit_id=$(git rev-parse HEAD)
 
           # To be removed
-          cd ..
-          cd code2docs-ai-core
-          workflow_run=$(jq --arg id "${{ github.run_id }}" --arg file_count "$file_count" --arg latest_commit_id "$latest_commit_id" 'map(if .id == $id then .file_count = $file_count | .latest_commit_id = $latest_commit_id else . end)' workflow_runs.json)
-          echo "$workflow_run" > workflow_runs.json
-          git add workflow_runs.json
-          git commit -m "Update workflow_runs.json with file_count and latest_commit_id"
-          git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/${{ github.repository }}.git main
+          # cd ..
+          # cd code2docs-ai-core
+          # workflow_run=$(jq --arg id "${{ github.run_id }}" --arg file_count "$file_count" --arg latest_commit_id "$latest_commit_id" 'map(if .id == $id then .file_count = $file_count | .latest_commit_id = $latest_commit_id else . end)' workflow_runs.json)
+          # echo "$workflow_run" > workflow_runs.json
+          # git add workflow_runs.json
+          # git commit -m "Update workflow_runs.json with file_count and latest_commit_id"
+          # git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/${{ github.repository }}.git main
 
-          # new
-          curl --fail -X POST "${{ github.event.inputs.serverEndPoint }}"/github/update/repo-versions \
+          curl --fail -k -X POST "${{ github.event.inputs.serverEndPoint }}"/github/update/repo-versions \
           -H "Content-Type: application/json" \
           -d '{
                 "id": "${{ github.event.inputs.repoVersionId }}",
@@ -155,15 +154,14 @@ jobs:
       - name: Update workflow run state
         run: |
           # To be removed
-          cd code2docs-ai-core
-          workflow_run=$(jq --arg id "${{ github.run_id }}" --arg status "completed" --arg completed_at "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" 'map(if .id == $id then .status = $status | .completed_at = $completed_at else . end)' workflow_runs.json)
-          echo "$workflow_run" > workflow_runs.json
-          git add workflow_runs.json
-          git commit -m "Update workflow_runs.json with completed status"
-          git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/${{ github.repository }}.git main
+          # cd code2docs-ai-core
+          # workflow_run=$(jq --arg id "${{ github.run_id }}" --arg status "completed" --arg completed_at "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" 'map(if .id == $id then .status = $status | .completed_at = $completed_at else . end)' workflow_runs.json)
+          # echo "$workflow_run" > workflow_runs.json
+          # git add workflow_runs.json
+          # git commit -m "Update workflow_runs.json with completed status"
+          # git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/${{ github.repository }}.git main
 
-          # new
-          curl --fail -X POST "${{ github.event.inputs.serverEndPoint }}"/github/update/repo-versions \
+          curl --fail -k -X POST "${{ github.event.inputs.serverEndPoint }}"/github/update/repo-versions \
           -H "Content-Type: application/json" \
           -d '{
                 "id": "${{ github.event.inputs.repoVersionId }}",
