@@ -125,7 +125,7 @@ jobs:
           git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/${{ github.repository }}.git main
 
       - name: Install jq
-          run: sudo apt-get install -y jq
+        run: sudo apt-get install -y jq
 
       - name: Update repo versions
         env:
@@ -133,7 +133,7 @@ jobs:
           REPO_VERSION_ID: ${{ env.REPO_VERSION_ID }}
           WORKFLOW_ID: ${{ github.run_id }}
           FILE_COUNT: ${{ steps.parse_repo.outputs.file_count }}
-          COMMIT_ID: ${{ steps.get_commit.outputs.commit_id }}
+          COMMIT_ID: ${{ steps.get_commit.outputs.latest_commit_id }}
         run: |
           DATA=$(jq -n \
             --arg id "$REPO_VERSION_ID" \
@@ -190,19 +190,22 @@ jobs:
         env:
           SERVER_ENDPOINT: ${{ env.SERVER_ENDPOINT }}
           REPO_VERSION_ID: ${{ env.REPO_VERSION_ID }}
+          DOC_URL: https://github.com/code2docs-ai/${{ env.docs_repo_name }}
         run: |
           DATA=$(jq -n \
             --arg id "$REPO_VERSION_ID" \
             --arg status "completed" \
+            --arg doc_url "$DOC_URL" \
             --arg completed_at "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
             '{
               id: $id,
               status: $status,
+              doc_url: $doc_url,
               completed_at: $completed_at
             }')
 
           echo "Sending: $DATA"
-          
+
           curl -v --fail -k -X POST "$SERVER_ENDPOINT/github/update/repo-versions" \
             -H "Content-Type: application/json" \
             -d "$DATA" \
