@@ -4,10 +4,11 @@
     "repoUrl": "https://github.com/TheAlgorithms/Java",
     "branchName": "main",
     "docs_repo_name": "TheAlgorithms_Java",
-    "status": "in_progress",
+    "status": "completed",
     "created_at": "2025-04-07T03:31:29Z",
     "file_count": "1341",
-    "latest_commit_id": "2570a996648c2244b9b89196a4faf4710439c4ff"
+    "latest_commit_id": "2570a996648c2244b9b89196a4faf4710439c4ff",
+    "completed_at": "2025-04-07T08:53:01Z"
   },
   {
     "id": "14244019219",
