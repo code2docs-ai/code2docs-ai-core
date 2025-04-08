@@ -52,20 +52,56 @@ jobs:
           docs_repo_name="${orgName}_${repoName}"
           echo "docs_repo_name=$docs_repo_name" >> $GITHUB_ENV
 
-      - name: Check if repo exists
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Clone the source and update repo versions
+        env:
+          SERVER_ENDPOINT: ${{ env.SERVER_ENDPOINT }}
+          REPO_VERSION_ID: ${{ env.REPO_VERSION_ID }}
+          WORKFLOW_ID: ${{ github.run_id }}
+          REPO_NAME: ${{ env.repoName }}
+        run: |
+          git clone ${{ github.event.inputs.repoUrl }} "${{ env.repo_name }}"
+          cd "${{ env.repo_name }}"
+
+          file_count=$(find . -type f | wc -l)
+          latest_commit_id=$(git rev-parse HEAD)
+
+          DATA=$(jq -n \
+            --arg id "$REPO_VERSION_ID" \
+            --arg workflow_id "$WORKFLOW_ID" \
+            --arg status "in_progress(parse-repo)" \
+            --argjson file_count "$(echo $file_count | sed 's/[^0-9]*//g')" \
+            --arg commit_id "$latest_commit_id" \
+            '{
+              id: $id,
+              workflow_id: $workflow_id,
+              status: $status,
+              file_count: $file_count,
+              current_commit_id: $commit_id
+            }') || { echo "Failed to generate JSON"; exit 1; }
+
+          echo "Generated JSON: $DATA"
+
+          curl_response=$(curl --fail -k -v -X POST -L "$SERVER_ENDPOINT/github/update/repo-versions" \
+            -H "Content-Type: application/json" \
+            -d "$DATA" 2>&1) || { echo "API call failed. Log: $curl_response"; exit 1; }
+
+      - name: Check if docs-repo exists
         id: check-repo
         run: |
           repo_exists=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: token ${{ secrets.MY_PAT }}" \
           https://api.github.com/repos/code2docs-ai/${{ env.docs_repo_name }})
           echo "repo_exists=$repo_exists" >> $GITHUB_ENV
 
-      - name: Delete existing repo
+      - name: Delete existing docs-repo
         if: env.repo_exists == '200'
         run: |
           curl -X DELETE -H "Authorization: token ${{ secrets.MY_PAT }}" \
           https://api.github.com/repos/code2docs-ai/${{ env.docs_repo_name }}
 
-      - name: Create new repo
+      - name: Create new docs-repo
         run: |
           curl --fail -X POST -H "Authorization: token ${{ secrets.MY_PAT }}" \
           -H "Accept: application/vnd.github.v3+json" \
@@ -92,99 +128,62 @@ jobs:
             rm -rf ${{ env.repoName }}
           fi
 
-      - name: Clone the current repository and store workflow run states
-        run: |
-          git clone https://github.com/${{ github.repository }}.git
-          cd code2docs-ai-core
-          if [ ! -f workflow_runs.json ]; then
-            echo "[]" > workflow_runs.json
-          fi
-          workflow_run=$(jq -n --arg id "${{ github.run_id }}" --arg repoUrl "${{ github.event.inputs.repoUrl }}" --arg branchName "${{ github.event.inputs.branchName }}" --arg docs_repo_name "${{ env.docs_repo_name }}" --arg status "in_progress"  --arg created_at "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" '{id: $id, repoUrl: $repoUrl, branchName: $branchName, docs_repo_name: $docs_repo_name, status: $status, created_at: $created_at}')
-          jq ". = [$workflow_run] + ." workflow_runs.json > tmp.json && mv tmp.json workflow_runs.json
-          git config --global user.email "code2docs-ai@leansoftx.com"
-          git config --global user.name "code2docs-ai agent"
-          git add workflow_runs.json
-          git commit -m "Update workflow_runs.json"
-          git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/${{ github.repository }}.git main
-
-      - name: Clone the source from repoUrl
-        id: parse_repo
-        run: |
-          git clone ${{ github.event.inputs.repoUrl }} ${{ env.repoName }}
-          cd ${{ env.repoName }}
-          file_count=$(find . -type f | wc -l)
-          latest_commit_id=$(git rev-parse HEAD)
-          echo "file_count=$file_count" >> $GITHUB_OUTPUT
-          echo "latest_commit_id=$latest_commit_id" >> $GITHUB_OUTPUT
-          cd ..
-          cd code2docs-ai-core
-          workflow_run=$(jq --arg id "${{ github.run_id }}" --arg file_count "$file_count" --arg latest_commit_id "$latest_commit_id" 'map(if .id == $id then .file_count = $file_count | .latest_commit_id = $latest_commit_id else . end)' workflow_runs.json)
-          echo "$workflow_run" > workflow_runs.json
-          git add workflow_runs.json
-          git commit -m "Update workflow_runs.json with file_count and latest_commit_id"
-          git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/${{ github.repository }}.git main
-
-      - name: Install jq
-        run: sudo apt-get install -y jq
-
-      - name: Update repo versions
+      - name: Send llm-explain-code status
         env:
           SERVER_ENDPOINT: ${{ env.SERVER_ENDPOINT }}
           REPO_VERSION_ID: ${{ env.REPO_VERSION_ID }}
-          WORKFLOW_ID: ${{ github.run_id }}
-          FILE_COUNT: ${{ steps.parse_repo.outputs.file_count }}
-          COMMIT_ID: ${{ steps.parse_repo.outputs.latest_commit_id }}
         run: |
           DATA=$(jq -n \
             --arg id "$REPO_VERSION_ID" \
-            --arg workflow_id "$WORKFLOW_ID" \
-            --arg status "in_progress(parse-repo)" \
-            --argjson file_count "$(echo $FILE_COUNT | sed 's/[^0-9]*//g')" \
-            --arg commit_id "$COMMIT_ID" \
+            --arg status "in_progress(llm-explain-code)" \
             '{
               id: $id,
-              workflow_id: $workflow_id,
               status: $status,
-              file_count: $file_count,
-              current_commit_id: $commit_id
-            }') || { echo "Failed to generate JSON"; exit 1; }
-
-          echo "Generated JSON: $DATA"
-
-          curl_response=$(curl --fail -k -v -X POST -L "$SERVER_ENDPOINT/github/update/repo-versions" \
+            }')
+          echo "Sending: $DATA"
+          curl -v --fail -k -X POST "$SERVER_ENDPOINT/github/update/repo-versions" \
             -H "Content-Type: application/json" \
-            -d "$DATA" 2>&1) || { echo "API call failed. Log: $curl_response"; exit 1; }
+            -d "$DATA" \
+            && echo "Update succeeded" \
+            || { echo "Update failed"; exit 1; }
 
-          echo "API call succeeded: $curl_response"
-
-      - name: Run aise-cli
+      - name: Run aise-cli parse-repo
         run: |
-          # source /data/source/aise-cli/.venv/bin/activate
-          # aise-cli --config_file /data/source/_temp/aise_cli_config.json version
-          # aise-cli --config_file /data/source/_temp/aise_cli_config.json repo delete-repo ${{ env.repoName }}
-          # aise-cli --config_file /data/source/_temp/aise_cli_config.json repo parse-repo --repo_path ./${{ env.repoName }}
           source /data/source/aise-cli/.venv/bin/activate
           aise-cli  version
           aise-cli  repo delete-repo ${{ env.repoName }}
           aise-cli  repo parse-repo --repo_path ./${{ env.repoName }}
+
+      - name: Send export-docs status
+        env:
+          SERVER_ENDPOINT: ${{ env.SERVER_ENDPOINT }}
+          REPO_VERSION_ID: ${{ env.REPO_VERSION_ID }}
+        run: |
+          DATA=$(jq -n \
+            --arg id "$REPO_VERSION_ID" \
+            --arg status "in_progress(export-docs)" \
+            '{
+              id: $id,
+              status: $status,
+            }')
+          echo "Sending: $DATA"
+          curl -v --fail -k -X POST "$SERVER_ENDPOINT/github/update/repo-versions" \
+            -H "Content-Type: application/json" \
+            -d "$DATA" \
+            && echo "Update succeeded" \
+            || { echo "Update failed"; exit 1; }
+
+      - name: Run aise-cli export-docs
+        run: |
+          source /data/source/aise-cli/.venv/bin/activate  
           cd ${{ env.docs_repo_name }}
           mkdir docs
           cd docs
           mkdir ${{ env.repoName }}
-          # aise-cli --config_file /data/source/_temp/aise_cli_config.json repo export-docs --repo_name ${{ env.repoName }} --output_path ./docs/${{ env.repoName }}
           aise-cli  repo export-docs --repo_name ${{ env.repoName }} --output_path ./docs/${{ env.repoName }}
           git add .
           git commit -m "Generate document for ${{ env.repoName }}"
           git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/code2docs-ai/${{ env.docs_repo_name }}.git main
-
-      - name: Update workflow run state
-        run: |
-          cd code2docs-ai-core
-          workflow_run=$(jq --arg id "${{ github.run_id }}" --arg status "completed" --arg completed_at "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" 'map(if .id == $id then .status = $status | .completed_at = $completed_at else . end)' workflow_runs.json)
-          echo "$workflow_run" > workflow_runs.json
-          git add workflow_runs.json
-          git commit -m "Update workflow_runs.json with completed status"
-          git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/${{ github.repository }}.git main
 
       - name: Send completion status
         env:
