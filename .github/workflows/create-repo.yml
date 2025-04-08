@@ -60,10 +60,10 @@ jobs:
           SERVER_ENDPOINT: ${{ env.SERVER_ENDPOINT }}
           REPO_VERSION_ID: ${{ env.REPO_VERSION_ID }}
           WORKFLOW_ID: ${{ github.run_id }}
-          REPO_NAME: ${{ env.repoName }}
         run: |
-          git clone ${{ github.event.inputs.repoUrl }} "$REPO_NAME"
-          cd "$REPO_NAME"
+          echo "${{ env.repoName }}"
+          git clone ${{ github.event.inputs.repoUrl }} "${{ env.repoName }}"
+          cd "${{ env.repoName }}"
 
           file_count=$(find . -type f | wc -l)
           latest_commit_id=$(git rev-parse HEAD)
