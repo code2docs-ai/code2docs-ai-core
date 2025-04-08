@@ -47,10 +47,16 @@ jobs:
         run: |
           orgName=$(echo "${{ github.event.inputs.repoUrl }}" | cut -d'/' -f4)
           repoName=$(echo "${{ github.event.inputs.repoUrl }}" | cut -d'/' -f5 | cut -d'.' -f1)
-          echo "orgName=$orgName" >> $GITHUB_ENV
+          echo "orgName=$orgName" >> $GITHUB_ENV         
           echo "repoName=$repoName" >> $GITHUB_ENV
           docs_repo_name="${orgName}_${repoName}"
           echo "docs_repo_name=$docs_repo_name" >> $GITHUB_ENV
+          
+      - name: Print extracted variables
+        run: |
+          echo "orgName is: ${{ env.orgName }}"
+          echo "repoName is: ${{ env.repoName }}"
+          echo "docs_repo_name is: ${{ env.docs_repo_name }}"
 
       - name: Install jq
         run: sudo apt-get install -y jq
