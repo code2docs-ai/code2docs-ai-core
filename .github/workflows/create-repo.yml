@@ -61,9 +61,8 @@ jobs:
           REPO_VERSION_ID: ${{ env.REPO_VERSION_ID }}
           WORKFLOW_ID: ${{ github.run_id }}
         run: |
-          echo "当前目录是：$(pwd)"
-          git clone ${{ github.event.inputs.repoUrl }} "${{ env.repoName }}"
-          cd "${{ env.repoName }}"
+          git clone ${{ github.event.inputs.repoUrl }} ${{ env.repoName }}
+          cd ${{ env.repoName }}
 
           file_count=$(find . -type f | wc -l)
           latest_commit_id=$(git rev-parse HEAD)
@@ -91,7 +90,7 @@ jobs:
       - name: Check if docs-repo exists
         id: check-repo
         run: |
-          echo "当前目录是：$(pwd)"
+
           repo_exists=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: token ${{ secrets.MY_PAT }}" \
           https://api.github.com/repos/code2docs-ai/${{ env.docs_repo_name }})
           echo "repo_exists=$repo_exists" >> $GITHUB_ENV
@@ -111,7 +110,7 @@ jobs:
 
       - name: Clone the newly created repo
         run: |
-          echo "当前目录是：$(pwd)"
+
           if [ -d "${{ env.docs_repo_name }}" ]; then
             rm -rf ${{ env.docs_repo_name }}
           fi
@@ -135,7 +134,7 @@ jobs:
           SERVER_ENDPOINT: ${{ env.SERVER_ENDPOINT }}
           REPO_VERSION_ID: ${{ env.REPO_VERSION_ID }}
         run: |
-          echo "当前目录是：$(pwd)"
+
           DATA=$(jq -n \
             --arg id "$REPO_VERSION_ID" \
             --arg status "in_progress(llm-explain-code)" \
@@ -152,7 +151,7 @@ jobs:
 
       - name: Run aise-cli parse-repo
         run: |
-          echo "当前目录是：$(pwd)"
+
           source /data/source/aise-cli/.venv/bin/activate
           aise-cli  version
           aise-cli  repo delete-repo ${{ env.repoName }}
