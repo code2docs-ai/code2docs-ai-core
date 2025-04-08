@@ -51,7 +51,7 @@ jobs:
           echo "repoName=$repoName" >> $GITHUB_ENV
           docs_repo_name="${orgName}_${repoName}"
           echo "docs_repo_name=$docs_repo_name" >> $GITHUB_ENV
-          
+
       - name: Print extracted variables
         run: |
           echo "orgName is: ${{ env.orgName }}"
@@ -60,6 +60,12 @@ jobs:
 
       - name: Install jq
         run: sudo apt-get install -y jq
+
+      - name: Check if source_repo exists and delete it
+        run: |
+          if [ -d "${{ env.repoName }}" ]; then
+            rm -rf ${{ env.repoName }}
+          fi
 
       - name: Clone the source and update repo versions
         env:
@@ -129,11 +135,6 @@ jobs:
           git commit -m "Add README.md"
           git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/code2docs-ai/${{ env.docs_repo_name }}.git main
 
-      - name: Check if source_repo exists and delete it
-        run: |
-          if [ -d "${{ env.repoName }}" ]; then
-            rm -rf ${{ env.repoName }}
-          fi
 
       - name: Send llm-explain-code status
         env:
