@@ -57,48 +57,7 @@ jobs:
           echo "orgName is: ${{ env.orgName }}"
           echo "repoName is: ${{ env.repoName }}"
           echo "docs_repo_name is: ${{ env.docs_repo_name }}"
-
-      - name: Install jq
-        run: sudo apt-get install -y jq
-
-      - name: Check if source_repo exists and delete it
-        run: |
-          if [ -d "${{ env.repoName }}" ]; then
-            rm -rf ${{ env.repoName }}
-          fi
-
-      - name: Clone the source and update repo versions
-        env:
-          SERVER_ENDPOINT: ${{ env.SERVER_ENDPOINT }}
-          REPO_VERSION_ID: ${{ env.REPO_VERSION_ID }}
-          WORKFLOW_ID: ${{ github.run_id }}
-        run: |
-          git clone ${{ github.event.inputs.repoUrl }} ${{ env.repoName }}
-          cd ${{ env.repoName }}
-
-          file_count=$(find . -type f | wc -l)
-          latest_commit_id=$(git rev-parse HEAD)
-
-          DATA=$(jq -n \
-            --arg id "$REPO_VERSION_ID" \
-            --arg workflow_id "$WORKFLOW_ID" \
-            --arg status "in_progress(parse-repo)" \
-            --argjson file_count "$(echo $file_count | sed 's/[^0-9]*//g')" \
-            --arg commit_id "$latest_commit_id" \
-            '{
-              id: $id,
-              workflow_id: $workflow_id,
-              status: $status,
-              file_count: $file_count,
-              current_commit_id: $commit_id
-            }') || { echo "Failed to generate JSON"; exit 1; }
-
-          echo "Generated JSON: $DATA"
-
-          curl_response=$(curl --fail -k -v -X POST -L "$SERVER_ENDPOINT/github/update/repo-versions" \
-            -H "Content-Type: application/json" \
-            -d "$DATA" 2>&1) || { echo "API call failed. Log: $curl_response"; exit 1; }
-
+      
       - name: Check if docs-repo exists
         id: check-repo
         run: |
@@ -135,6 +94,52 @@ jobs:
           git commit -m "Add README.md"
           git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/code2docs-ai/${{ env.docs_repo_name }}.git main
 
+      - name: Install jq
+              run: sudo apt-get install -y jq
+            - name: Check if source_repo exists and delete it
+              run: |
+                if [ -d "${{ env.repoName }}" ]; then
+                  rm -rf ${{ env.repoName }}
+                fi
+
+      - name: Clone the source and update repo versions
+        env:
+          SERVER_ENDPOINT: ${{ env.SERVER_ENDPOINT }}
+          REPO_VERSION_ID: ${{ env.REPO_VERSION_ID }}
+          WORKFLOW_ID: ${{ github.run_id }}
+        run: |
+          git clone ${{ github.event.inputs.repoUrl }} ${{ env.repoName }}
+          cd ${{ env.repoName }}
+
+          file_count=$(find . -type f | wc -l)
+          latest_commit_id=$(git rev-parse HEAD)
+
+          DATA=$(jq -n \
+            --arg id "$REPO_VERSION_ID" \
+            --arg workflow_id "$WORKFLOW_ID" \
+            --arg status "in_progress(parse-repo)" \
+            --argjson file_count "$(echo $file_count | sed 's/[^0-9]*//g')" \
+            --arg commit_id "$latest_commit_id" \
+            '{
+              id: $id,
+              workflow_id: $workflow_id,
+              status: $status,
+              file_count: $file_count,
+              current_commit_id: $commit_id
+            }') || { echo "Failed to generate JSON"; exit 1; }
+
+          echo "Generated JSON: $DATA"
+
+          curl_response=$(curl --fail -k -v -X POST -L "$SERVER_ENDPOINT/github/update/repo-versions" \
+            -H "Content-Type: application/json" \
+            -d "$DATA" 2>&1) || { echo "API call failed. Log: $curl_response"; exit 1; }
+
+      - name: Run aise-cli parse-repo
+        run: |
+          source /data/source/aise-cli/.venv/bin/activate
+          aise-cli version
+          aise-cli repo delete-repo ${{ env.repoName }}
+          aise-cli repo parse-repo --repo_path ./${{ env.repoName }}
 
       - name: Send llm-explain-code status
         env:
@@ -156,13 +161,34 @@ jobs:
             && echo "Update succeeded" \
             || { echo "Update failed"; exit 1; }
 
-      - name: Run aise-cli parse-repo
+      - name: Run aise-cli explain-code
         run: |
-
           source /data/source/aise-cli/.venv/bin/activate
-          aise-cli  version
-          aise-cli  repo delete-repo ${{ env.repoName }}
-          aise-cli  repo parse-repo --repo_path ./${{ env.repoName }}
+          aise-cli repo llm-explain-code --repo_name ${{ env.repoName }}
+
+      - name: Send llm-summary status
+        env:
+          SERVER_ENDPOINT: ${{ env.SERVER_ENDPOINT }}
+          REPO_VERSION_ID: ${{ env.REPO_VERSION_ID }}
+        run: |
+          DATA=$(jq -n \
+            --arg id "$REPO_VERSION_ID" \
+            --arg status "in_progress(llm-summary)" \
+            '{
+              id: $id,
+              status: $status,
+            }')
+          echo "Sending: $DATA"
+          curl -v --fail -k -X POST "$SERVER_ENDPOINT/github/update/repo-versions" \
+            -H "Content-Type: application/json" \
+            -d "$DATA" \
+            && echo "Update succeeded" \
+            || { echo "Update failed"; exit 1; }
+
+      - name: Run aise-cli summary repo
+        run: |
+          source /data/source/aise-cli/.venv/bin/activate
+          aise-cli repo llm-summary  --repo_name ${{ env.repoName }}
 
       - name: Send export-docs status
         env:
