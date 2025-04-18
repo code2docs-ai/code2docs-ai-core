@@ -252,8 +252,8 @@ jobs:
             '{
               id: $id,
               status: $status,
-              docs_url: if $docs_url == "null" then null else $docs_url end,
-              completed_at: if $completed_at == "null" then null else $completed_at end,
+              docs_url: (if $docs_url == "null" then null else $docs_url end),
+              completed_at: (if $completed_at == "null" then null else $completed_at end),
               update_at: $update_at,
               update_by: $update_by
             }')
