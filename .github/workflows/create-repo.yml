@@ -22,6 +22,9 @@ jobs:
         run: |
           rm -rf *
 
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
       - name: Print input parameters
         run: |
           echo "repoUrl: ${{ github.event.inputs.repoUrl }}"
@@ -93,9 +96,6 @@ jobs:
           git add README.md
           git commit -m "Add README.md"
           git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/code2docs-ai/${{ env.docs_repo_name }}.git main
-
-      - name: Install jq
-        run: sudo apt-get install -y jq
 
       - name: Check if source_repo exists and delete it
         run: |
@@ -228,7 +228,7 @@ jobs:
           REPO_VERSION_ID: ${{ env.REPO_VERSION_ID }}
         if: always()
         run: |
-          AT=$(date -u +"%Y-%m-%dT%H:%M:%SZ")  
+          AT=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           if [[ "${{ job.status }}" == "success" ]]; then
             STATUS="completed"
             DOCS_URL="https://github.com/code2docs-ai/${{ env.docs_repo_name }}"
@@ -244,7 +244,7 @@ jobs:
 
           DATA=$(jq -n \
             --arg id "$REPO_VERSION_ID" \
-            --arg status "$STATUS" \  
+            --arg status "$STATUS" \
             --arg docs_url "$DOCS_URL" \
             --arg completed_at "$COMPLETED_AT" \
             --arg update_at "$UPDATE_AT" \
