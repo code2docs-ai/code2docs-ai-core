@@ -228,8 +228,7 @@ jobs:
           REPO_VERSION_ID: ${{ env.REPO_VERSION_ID }}
         if: always()
         run: |
-
-          AT = "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          AT=$(date -u +"%Y-%m-%dT%H:%M:%SZ")  
           if [[ "${{ job.status }}" == "success" ]]; then
             STATUS="completed"
             DOCS_URL="https://github.com/code2docs-ai/${{ env.docs_repo_name }}"
@@ -241,13 +240,13 @@ jobs:
           fi
 
           UPDATE_AT="$AT"
-          UPDATE_BY="workflow_processing"  
+          UPDATE_BY="workflow_processing"
 
           DATA=$(jq -n \
             --arg id "$REPO_VERSION_ID" \
-            --arg status "$ACTUAL_STATUS" \
+            --arg status "$STATUS" \  
             --arg docs_url "$DOCS_URL" \
-            --arg completed_at "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
+            --arg completed_at "$COMPLETED_AT" \
             --arg update_at "$UPDATE_AT" \
             --arg update_by "$UPDATE_BY" \
             '{
