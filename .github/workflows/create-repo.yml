@@ -222,22 +222,41 @@ jobs:
           git commit -m "Generate document for ${{ env.repoName }}"
           git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/code2docs-ai/${{ env.docs_repo_name }}.git main
 
-      - name: Send completion status
+      - name: Send final status
         env:
           SERVER_ENDPOINT: ${{ env.SERVER_ENDPOINT }}
           REPO_VERSION_ID: ${{ env.REPO_VERSION_ID }}
-          DOCS_URL: https://github.com/code2docs-ai/${{ env.docs_repo_name }}
+        if: always()
         run: |
+
+          AT = "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          if [[ "${{ job.status }}" == "success" ]]; then
+            STATUS="completed"
+            DOCS_URL="https://github.com/code2docs-ai/${{ env.docs_repo_name }}"
+            COMPLETED_AT="$AT"
+          else
+            STATUS="failed"
+            DOCS_URL="null"
+            COMPLETED_AT="null"
+          fi
+
+          UPDATE_AT="$AT"
+          UPDATE_BY="workflow_processing"  
+
           DATA=$(jq -n \
             --arg id "$REPO_VERSION_ID" \
-            --arg status "completed" \
+            --arg status "$ACTUAL_STATUS" \
             --arg docs_url "$DOCS_URL" \
             --arg completed_at "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
+            --arg update_at "$UPDATE_AT" \
+            --arg update_by "$UPDATE_BY" \
             '{
               id: $id,
               status: $status,
-              docs_url: $docs_url,
-              completed_at: $completed_at
+              docs_url: if $docs_url == "null" then null else $docs_url end,
+              completed_at: if $completed_at == "null" then null else $completed_at end,
+              update_at: $update_at,
+              update_by: $update_by
             }')
 
           echo "Sending: $DATA"
