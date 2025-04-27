@@ -214,9 +214,8 @@ jobs:
         run: |
           source /data/source/aise-cli/.venv/bin/activate  
           cd ${{ env.docs_repo_name }}
-          REPO_DIC_ABS="$(cd .. && pwd)/${{ env.repoName }}"
-          echo "REPO_DIC_ABS=$REPO_DIC_ABS"
-          aise-cli  repo export-docs --repo_name ${{ env.repoName }} --repo_dic $REPO_DIC_ABS  --output_path ./  
+          REPO_DIR_ABS="$(cd .. && pwd)/${{ env.repoName }}"
+          aise-cli  repo export-docs --repo_name ${{ env.repoName }} --repo_dic $REPO_DIR_ABS  --output_path ./  
           mv -f ${{ env.repoName }}/* .
           rmdir ${{ env.repoName }}
           git add .
