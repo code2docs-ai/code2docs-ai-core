@@ -218,7 +218,7 @@ jobs:
           # cd docs
           mkdir ${{ env.repoName }}
           aise-cli  repo export-docs --repo_name ${{ env.repoName }} --repo_dic ../${{ env.repoName }}  --output_path ./  
-          mv -f ${{ env.repoName }}/{*,.*} .
+          mv -f ${{ env.repoName }}/* .
           rmdir ${{ env.repoName }}
           git add .
           git commit -m "Generate document for ${{ env.repoName }}"
