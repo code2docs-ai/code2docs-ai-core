@@ -216,8 +216,8 @@ jobs:
           cd ${{ env.docs_repo_name }}
           REPO_DIR_ABS="$(cd .. && pwd)/${{ env.repoName }}"
           aise-cli  repo export-docs --repo_name ${{ env.repoName }} --repo_dic $REPO_DIR_ABS  --output_path ./  
-          mv -f ${{ env.repoName }}/* .
-          rmdir ${{ env.repoName }}
+          # mv -f ${{ env.repoName }}/* .
+          # rmdir ${{ env.repoName }}
           git add .
           git commit -m "Generate document for ${{ env.repoName }}"
           git push https://code2docs-ai:${{ secrets.MY_PAT }}@github.com/code2docs-ai/${{ env.docs_repo_name }}.git main
